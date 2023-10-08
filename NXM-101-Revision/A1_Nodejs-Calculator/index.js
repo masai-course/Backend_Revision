@@ -32,7 +32,7 @@ switch (operation) {
     else {
        const randomNumber = randomBytes(length, (err, buf) => {
         if (err) throw err;
-        console.log(`${buf.toString('hex')}`);
+        console.log(`${buf.toString('hex').slice(0, length)}`);
       });
     }
    break;
