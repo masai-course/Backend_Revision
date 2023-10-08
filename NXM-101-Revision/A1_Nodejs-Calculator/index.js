@@ -1,7 +1,7 @@
 // index.js
 
 //  import the crypto module
-const crypto= require('crypto');
+const {randomBytes}= require('crypto');
 
 
 
@@ -27,14 +27,13 @@ switch (operation) {
   case "tan":console.log(Math.tan(Number(numbers[0])));
   break;
   case "random":
-    const length = numbers[0];
-    if(length) console.log("Provide length for random number generation.")
+    const length = +numbers[0];
+    if(!length) console.log("Provide length for random number generation.")
     else {
-      const numBytes = Math.ceil(Number(numbers[0]) / 2);
-      const randomBytes = crypto.randomBytes(numBytes);
-      const randomNumberHex = randomBytes.toString("hex");
-      const randomNumber = parseInt(randomNumberHex, 16);
-      console.log(randomNumber);
+       const randomNumber = randomBytes(length, (err, buf) => {
+        if (err) throw err;
+        console.log(`${buf.toString('hex')}`);
+      });
     }
    break;
 
